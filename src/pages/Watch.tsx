@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { SkipBack, SkipForward, Share2 } from 'lucide-react';
+import { SkipBack, SkipForward, Share2, FileText } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import VideoPlayer from '@/components/VideoPlayer';
 import RecommendedVideos from '@/components/RecommendedVideos';
@@ -114,12 +114,20 @@ const Watch = () => {
                       <SkipForward size={18} />
                     </button>
 
-                    <button 
-                      onClick={handleShare} 
+                    <button
+                      onClick={handleShare}
                       className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                       aria-label="Share"
                     >
                       <Share2 size={18} />
+                    </button>
+
+                    <button
+                      onClick={() => window.open(currentVideo.pdfUrl, '_blank')}
+                      className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                      aria-label="PDF"
+                    >
+                      <FileText size={18} />
                     </button>
                   </div>
                 </div>
@@ -147,6 +155,14 @@ const Watch = () => {
                   <button onClick={handleShare} className="control-button">
                     <Share2 size={18} />
                     <span>Share</span>
+                  </button>
+
+                  <button
+                    onClick={() => window.open(currentVideo.pdfUrl, '_blank')}
+                    className="control-button"
+                  >
+                    <FileText size={18} />
+                    <span>PDF</span>
                   </button>
                 </div>
               </div>

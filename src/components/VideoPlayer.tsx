@@ -107,6 +107,7 @@ const VideoPlayer = ({ embedUrl, title }: VideoPlayerProps) => {
           playsinline: 1,
           origin: window.location.origin,
           enablejsapi: 1,
+          widget_referrer: window.location.origin,
         },
         events: {
           onReady: onPlayerReady,
@@ -118,7 +119,7 @@ const VideoPlayer = ({ embedUrl, title }: VideoPlayerProps) => {
     };
 
     // Small delay to ensure DOM is ready
-    const timer = setTimeout(initPlayer, 100);
+    const timer = setTimeout(initPlayer, 50);
 
     return () => {
       clearTimeout(timer);
@@ -127,13 +128,12 @@ const VideoPlayer = ({ embedUrl, title }: VideoPlayerProps) => {
 
   // Reset when video changes
   useEffect(() => {
-    return () => {
-      playerInitialized.current = false;
-      setIsReady(false);
-      setIsPlaying(false);
-      setCurrentTime(0);
-      setDuration(0);
-    };
+    playerInitialized.current = false;
+    setIsReady(false);
+    setIsPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
+    setBuffered(0);
   }, [videoId]);
 
   const onPlayerReady = (event: any) => {
